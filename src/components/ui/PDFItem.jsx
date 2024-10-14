@@ -1,4 +1,5 @@
-import { FaFilePdf, FaEye, FaDownload } from 'react-icons/fa';
+import Link from "next/link";
+import { FaFilePdf, FaEye, FaDownload } from "react-icons/fa";
 
 const PDFItem = ({ pdfName, pdfCategory, viewLink, downloadLink }) => {
   return (
@@ -19,14 +20,12 @@ const PDFItem = ({ pdfName, pdfCategory, viewLink, downloadLink }) => {
       {/* Action Buttons */}
       <div className="ml-4 flex space-x-2">
         {/* View Button with Icon */}
-        <a
-          href={viewLink}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={"/view?url=" + viewLink}
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center"
         >
           <FaEye className="text-white text-lg hover:scale-110 transition-transform duration-300" />
-        </a>
+        </Link>
 
         {/* Download Button with Icon */}
         <a

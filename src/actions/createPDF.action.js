@@ -1,6 +1,7 @@
 "use server";
 import dbConnect from "@/lib/db";
 import PdfItemModel from "@/lib/models/pdfItem.model";
+import { revalidatePath } from "next/cache";
 
 export const createPDF = async (payload) => {
   try {
@@ -25,7 +26,7 @@ export const createPDF = async (payload) => {
 
     // Save the document to the database
     await newPDF.save();
-
+    revalidatePath("/");
     return {
       status: 201,
       message: "Pdf created successfully",
