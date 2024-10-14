@@ -1,5 +1,5 @@
 import PDFList from "@/components/ui/PDFList";
-import { connectDb } from "@/lib/db";
+import dbConnect from "@/lib/db";
 import PdfItemModel from "@/lib/models/pdfItem.model";
 
 export const revalidate = 100;
@@ -7,7 +7,7 @@ export const revalidate = 100;
 const Home = async () => {
   let pdfItems = [];
   try {
-    await connectDb();
+    await dbConnect();
     const docs = await PdfItemModel.find({}).lean().exec();
     pdfItems = docs.map((doc) => ({
       id: doc._id.toString(),

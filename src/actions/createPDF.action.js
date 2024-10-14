@@ -1,15 +1,14 @@
 "use server";
-import { connectDb } from "@/lib/db";
+import dbConnect from "@/lib/db";
 import PdfItemModel from "@/lib/models/pdfItem.model";
-import PDFItem from "@/lib/models/pdfItem.model";
 
 export const createPDF = async (payload) => {
   try {
     // Connect to the MongoDB database
-    await connectDb();
+    await dbConnect();
 
     // Parse the request body
-    const { pdfName, pdfUrl, pdfType, category, description } = payload;
+    const { pdfName, pdfUrl, category, description } = payload;
 
     // Validate required fields
     if (!pdfName || !pdfUrl || !category) {

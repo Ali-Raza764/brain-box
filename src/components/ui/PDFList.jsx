@@ -29,7 +29,7 @@ const PDFList = ({ pdfs }) => {
 
   return (
     <div className="p-6 h-full">
-      <div className="md:w-[30rem] max-w-4xl w-full mx-auto">
+      <div className="w-full mx-auto">
         <div className="mb-6 w-full">
           <input
             type="text"
