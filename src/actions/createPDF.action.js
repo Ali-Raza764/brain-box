@@ -1,5 +1,6 @@
 "use server";
 import { connectDb } from "@/lib/db";
+import PdfItemModel from "@/lib/models/pdfItem.model";
 import PDFItem from "@/lib/models/pdfItem.model";
 
 export const createPDF = async (payload) => {
@@ -16,7 +17,7 @@ export const createPDF = async (payload) => {
     }
 
     // Create a new PDFItem document
-    const newPDF = new PDFItem({
+    const newPDF = new PdfItemModel({
       pdfName,
       pdfUrl,
       category: category,
@@ -31,6 +32,6 @@ export const createPDF = async (payload) => {
       message: "Pdf created successfully",
     };
   } catch (error) {
-    throw new Error("An error occured");
+    throw new Error("An error occured", error);
   }
 };

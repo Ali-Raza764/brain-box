@@ -8,11 +8,12 @@ const PDFList = ({ pdfs }) => {
 
   // Filter PDFs based on the search term and selected category
   const filteredPDFs = pdfs.filter((pdf) => {
+    if (selectedCategory === "all") return pdfs;
     const matchesName = pdf.pdfName
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesCategory =
-      selectedCategory === "" || pdf.pdfCategory === selectedCategory;
+      selectedCategory === "" || pdf.category === selectedCategory;
     return matchesName && matchesCategory;
   });
 
@@ -28,41 +29,45 @@ const PDFList = ({ pdfs }) => {
 
   return (
     <div className="p-6 h-full">
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder="Search PDFs..."
-        className="mb-4 p-2 border border-gray-300 outline-none rounded w-full"
-      />
+      <div className="md:w-[30rem] max-w-4xl w-full mx-auto">
+        <div className="mb-6 w-full">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search PDFs..."
+            className="mb-4 p-2 border border-gray-300 outline-none rounded w-full"
+          />
 
-      {/* Category Selector */}
-      <select
-        value={selectedCategory}
-        onChange={handleCategoryChange}
-        className="mb-6 p-2 border border-gray-300 outline-none rounded w-full"
-      >
-        <option value="">All Categories</option>
-        <option value="Programming">Programming</option>
-        <option value="Design">Design</option>
-        <option value="Marketing">Marketing</option>
-      </select>
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="p-2 border border-gray-300 outline-none rounded w-full"
+          >
+            <option value="all">All</option>
+            <option value="book">Book</option>
+            <option value="paper">Paper</option>
+            <option value="grammar">Grammar</option>
+            <option value="notes">Notes</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-      {/* Render filtered PDFs */}
-      <div className="w-full flex items-center justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl">
+        <div className="w-full">
           {filteredPDFs.length > 0 ? (
-            filteredPDFs.map((pdf) => (
-              <PDFItem
-                key={pdf._id}
-                pdfName={pdf.pdfName}
-                pdfCategory={pdf.category}
-                viewLink={pdf.pdfUrl}
-                downloadLink={pdf.pdfUrl}
-              />
-            ))
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredPDFs.map((pdf) => (
+                <PDFItem
+                  key={pdf.id}
+                  pdfName={pdf.pdfName}
+                  pdfCategory={pdf.category}
+                  viewLink={pdf.pdfUrl}
+                  downloadLink={pdf.pdfUrl}
+                />
+              ))}
+            </div>
           ) : (
-            <p className="text-center col-span-full">
+            <p className="text-center w-full">
               No PDFs found matching the criteria.
             </p>
           )}

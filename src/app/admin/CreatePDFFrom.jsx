@@ -31,8 +31,6 @@ const CreatePDFForm = () => {
       description: e.target.description.value,
     };
 
-    console.log(data);
-
     try {
       const response = await createPDF(data);
       if (response.status === 201) {
@@ -112,6 +110,7 @@ const CreatePDFForm = () => {
             <option value="paper">Paper</option>
             <option value="grammar">Grammar</option>
             <option value="notes">Notes</option>
+            <option value="other">Other</option>
           </select>
         </div>
 

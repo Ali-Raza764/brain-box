@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PDFItemSchema = new mongoose.Schema({
+const PdfItemModelSchema = mongoose.Schema({
   pdfName: {
     type: String,
     required: true,
@@ -23,8 +23,9 @@ const PDFItemSchema = new mongoose.Schema({
   },
 });
 
-// Create the PDFItem model
-const PDFItem =
-  mongoose.models?.PDFItem || mongoose?.model("PDFItem", PDFItemSchema);
+// Create the PdfItemModel model
+const PdfItemModel =
+  mongoose.models.PdfItemModel ||
+  mongoose.model("PdfItemModel", PdfItemModelSchema);
 
-export default PDFItem;
+export default PdfItemModel;
